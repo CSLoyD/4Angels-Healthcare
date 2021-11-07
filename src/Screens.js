@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 // Imports for Initial Screens
 import Login from 'modules/login/screens';
 
