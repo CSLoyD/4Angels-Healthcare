@@ -2,7 +2,7 @@ workflows:
   my-workflow:
     environment:
         ndk: 21
-        java: 15
+        java: 1.8
         node: 16.9.0
         npm: latest
     triggering:
