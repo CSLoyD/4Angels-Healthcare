@@ -23,6 +23,7 @@ export const main_screen = [
     {
         name: 'Home',
         component: Home,
+        header: false,
     },
 ]
 

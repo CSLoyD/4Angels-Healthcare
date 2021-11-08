@@ -60,9 +60,9 @@ const Routes = (props) => {
     let is_loggedIn = props.login.is_loggedIn;
     return (
         <NavigationContainer onStateChange={state => state.index == 0 ? StatusBar.setHidden(false) : StatusBar.setHidden(false) } >
-            <Stack.Navigator screenOptions='screen'>
+            <Stack.Navigator>
                 {
-                    is_loggedIn ? <> {MainScreen} </> : InitialScreen
+                    is_loggedIn ? MainScreen : InitialScreen
                 }
             </Stack.Navigator>
         </NavigationContainer>
