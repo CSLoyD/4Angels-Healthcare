@@ -1,5 +1,22 @@
 workflows:
-  hello-world:
-    name: Hello world workflow
+  my-workflow:
+    environment:
+        ndk: 21
+        java: 15
+        node: 16.9.0
+        npm: latest
+    triggering:
+      events:
+        - push
+      branch_patterns: 
+        - pattern: develop
+          include: false
+      cancel_previous_builds: true
     scripts:
-        - echo "Hello World!"
+      - name: Launch emulator
+        script: |
+          set -e # exit on first failed command
+
+          cd $ANDROID_HOME/tools
+          emulator -avd emulator &
+          adb wait-for-device
