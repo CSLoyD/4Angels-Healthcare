@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Routes from './Routes';
 import AsyncStorage from '@react-native-community/async-storage';
-import { rootReducer} from './Store';
+import { rootReducer } from './Store';
 import { Provider } from 'react-redux';
 import { StatusBar, Platform } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
@@ -17,10 +17,10 @@ import {
     REGISTER
 } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import { configureStore, getDefaultMiddleware } from '@react-native-community/netinfo';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import SplashScreen from 'react-native-splash-screen';
 import FlashMessage from 'react-native-flash-message';
-import persistReducer from 'redux-persist/es/persistReducer';
+
 
 const persistConfig = {
     key: 'root',
@@ -29,10 +29,10 @@ const persistConfig = {
     timeout: null
 }
 
-const persistReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
-    reducer: persistReducer,
+    reducer: persistedReducer,
     middleware: getDefaultMiddleware({
         serializableCheck: {
            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]

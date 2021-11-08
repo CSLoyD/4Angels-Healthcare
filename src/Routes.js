@@ -36,11 +36,8 @@ const MainScreen = main_screen.map((screen, idx) => {
             name={screen.name}
             component={screen.component}
             options={({ route, navigation }) => ({
-                headerStyle: {
-                    backgroundColor: BODY.bg_LIGHT_GRAY,
-                    borderColor: 'transparent',
-                    elevation: 0
-                }
+                header: () => null,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
             })} />
         )
     } else {
@@ -63,7 +60,7 @@ const Routes = (props) => {
     let is_loggedIn = props.login.is_loggedIn;
     return (
         <NavigationContainer onStateChange={state => state.index == 0 ? StatusBar.setHidden(false) : StatusBar.setHidden(false) } >
-            <Stack.Navigator headerMode='screen'>
+            <Stack.Navigator screenOptions='screen'>
                 {
                     is_loggedIn ? <> {MainScreen} </> : InitialScreen
                 }

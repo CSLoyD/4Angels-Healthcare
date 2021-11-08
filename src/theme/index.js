@@ -100,3 +100,4 @@ export const FONTSIZE = {
     h2: 50,
     h1: 60
 }
+

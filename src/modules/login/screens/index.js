@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Dimensions, Image } from 'react-native';
-import { Container, Content, Button, View, Item, Input } from 'native-base';
+import { NativeBaseProvider, Container, Content, Button, View, Item, Input } from 'native-base';
 import { connect, useDispatch } from 'react-redux';
-import { styles } from '../style';
+import { styles } from '../styles';
 import { Text } from 'components';
-import { BODY } from 'theme';
+import { BODY } from '../../../theme';
 import { Bubbles } from 'react-native-loader';
 import {api} from 'api';
 import {assignState} from '../slices/LoginSlice';
@@ -22,6 +22,8 @@ const Login = (props) => {
 
     const dispatch = useDispatch()
     const navigation = props.navigation;
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
     const [isError, setIsErrors] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -39,20 +41,20 @@ const Login = (props) => {
             )
         })
     }
-
+        
     return (
-        <Container >
-            <Content >
+        <Container>
+            <Content>
                 <View style={{ height: height - (height * 0.1) }}>
                     <Image style={styles.logo} source={require('res/images/main-logo.png')} />
-                    <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
+                    <View styrle={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
                         {isError ? Errors : null}
                     </View>
                     <View style={{ flex: 1, backgroundColor: "#0086b3", marginTop: 30, borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>
                         <View style={{flexDirection: 'column', padding: 10, marginTop: 60 }}>
                             {/* <Text xb rg dark style={{ alignSelf: 'flex-start', marginLeft: 10 }}>Username</Text> */}
                             <Item style={styles.Item}>
-                                <Input placeholderTextColor='white' placeholder='Username/Email' value={email} name="username" onChangeText={val => setEmail(val)} />
+                                <Input placeholderTextColor='white' placeholder='Username/Email' value={username} name="username" onChangeText={val => setUsername(val)} />
                             </Item>
 
                             {/* <Text xb rg dark style={{ alignSelf: 'flex-start', marginTop: 10, marginLeft: 10 }}>PASSWORD</Text> */}
@@ -68,17 +70,17 @@ const Login = (props) => {
                             :(<Text dark xb>Login</Text>)
                             }
                         </Button>
-                        {/* <View style={{ justifyContent: 'space-between' }}>
+                        <View style={{ justifyContent: 'space-between' }}>
                             <Button style={[styles.Button2, { margin: 0, width: "50%" }]} transparent light onPress={() => navigation.navigate('Register')}>
                                 <Text light>Create New Account</Text>
                             </Button>
-                        </View> */}
+                        </View>
                     </View>
 
                 </View>
             </Content>
         </Container>
-    );
+    )
 }
 
 const mapStateToProps = (state) => {

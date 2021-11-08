@@ -69,7 +69,7 @@ const LoginSlice = createSlice({
             state[slicekey]  = value;
    },
    logOut:(state,action)=>{
-            state['is_loggedin']  = false;
+            state['is_loggedIn']  = false;
             state['logindata']    = [];
             return state;
    },
