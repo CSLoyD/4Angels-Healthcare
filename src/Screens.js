@@ -1,5 +1,6 @@
 // Imports for Initial Screens
 import Login from 'modules/login/screens';
+import Registration from 'modules/login/screens/Registration';
 
 
 // Imports for Main Screen
@@ -10,6 +11,10 @@ export const initial_screen = [
     {
         name: 'Login',
         component: Login,
+    },
+    {
+        name: 'Registration',
+        component: Registration,
     }
 ]
 

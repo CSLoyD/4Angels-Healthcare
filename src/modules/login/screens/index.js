@@ -75,7 +75,7 @@ const Login = (props) => {
                     <View styrle={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
                         {isError ? Errors : null}
                     </View>
-                    <View style={{ flex: 1, backgroundColor: "#0086b3", marginTop: 30, borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>
+                    <View style={{ flex: 1, backgroundColor: BODY.MAIN_COLOR, marginTop: 30, borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>
                         <View style={{flexDirection: 'column', padding: 10, marginTop: 60 }}>
                             {/* <Text xb rg dark style={{ alignSelf: 'flex-start', marginLeft: 10 }}>Username</Text> */}
                             <Item style={styles.Item}>
@@ -96,7 +96,7 @@ const Login = (props) => {
                             }
                         </Button>
                         <View style={{ justifyContent: 'space-between' }}>
-                            <Button style={[styles.Button2, { margin: 0, width: "50%" }]} transparent light onPress={() => navigation.navigate('Register')}>
+                            <Button style={[styles.Button2, { margin: 0, width: "50%" }]} transparent light onPress={() => navigation.navigate('Registration')}>
                                 <Text light>Create New Account</Text>
                             </Button>
                         </View>

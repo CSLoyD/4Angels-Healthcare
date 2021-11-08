@@ -62,7 +62,8 @@ export const BODY = {
     BLUE: '#065fd4',
     SKYBLUE: '#1b98e3',
 
-  
+    MAIN_COLOR: '#1b98e3',
+    SECONDARY_COLOR: '#34ddd0',
     THEME:  "#fff",
     ALTERNATE: '#F48A8A',
     BUTTON: '#F48A8A'
