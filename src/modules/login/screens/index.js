@@ -29,6 +29,31 @@ const Login = (props) => {
     const [isFetching, setIsFetching] = useState(false);
 
     const _login = async() => {
+
+        // setIsFetching(true);
+        // setIsErrors(false);
+        // const body = JSON.stringify({
+        //     "Username/Email": username,
+        //     "Password": password,
+        // });
+        // const response = await  api.auth('api/','EmployeeLogin',body);
+        // let data = await response.json();
+        // console.log('data',data);
+        // if (response.status ===200) {
+        //     console.log(response)
+        //     setIsFetching(false);
+        //     if (data.ret.status) {
+        //         await dispatch(assignState({slicekey:'logindata',value:data.ret.others.return[0]}));
+        //         await dispatch(assignState({slicekey:'is_loggedIn',value:true}));
+        //     }else{
+        //         setErrors(data.ret.msg);
+        //         setIsErrors(true);
+        //     }
+        // } else {
+        //     setIsErrors(true);
+        //     setErrors([data.ApiStatus]);
+        //     setIsFetching(false);
+        // }
         await dispatch(assignState({slicekey:'logindata',value:userdata}));
         await dispatch(assignState({slicekey:'is_loggedIn',value:true}));
     }
