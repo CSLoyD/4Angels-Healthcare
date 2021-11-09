@@ -29,33 +29,29 @@ const Login = (props) => {
     const [isFetching, setIsFetching] = useState(false);
 
     const _login = async() => {
-
-        // setIsFetching(true);
-        // setIsErrors(false);
-        // const body = JSON.stringify({
-        //     "Username/Email": username,
-        //     "Password": password,
-        // });
-        // const response = await  api.auth('api/','EmployeeLogin',body);
-        // let data = await response.json();
-        // console.log('data',data);
-        // if (response.status ===200) {
-        //     console.log(response)
-        //     setIsFetching(false);
-        //     if (data.ret.status) {
-        //         await dispatch(assignState({slicekey:'logindata',value:data.ret.others.return[0]}));
-        //         await dispatch(assignState({slicekey:'is_loggedIn',value:true}));
-        //     }else{
-        //         setErrors(data.ret.msg);
-        //         setIsErrors(true);
-        //     }
-        // } else {
-        //     setIsErrors(true);
-        //     setErrors([data.ApiStatus]);
-        //     setIsFetching(false);
-        // }
-        await dispatch(assignState({slicekey:'logindata',value:userdata}));
-        await dispatch(assignState({slicekey:'is_loggedIn',value:true}));
+        setIsFetching(true);
+        setIsErrors(false);
+        const body = JSON.stringify({
+            "username": username,
+            "password": password,
+        });
+        const response = await  api.auth('api/','EmployeeLogin',body);
+        let data = await response.json();
+        if (response.status ===200) {
+            if(data.stat === "Success") {
+                setIsFetching(false);
+                await dispatch(assignState({slicekey:'logindata',value:data.datas}));
+                await dispatch(assignState({slicekey:'is_loggedIn',value:true}));
+            } else {
+                setIsErrors(true);
+                setErrors([data.msg]);
+                setIsFetching(false);
+            }
+        } else {
+            setIsErrors(true);
+            setErrors([data.msg]);
+            setIsFetching(false);
+        }
     }
 
     let Errors = [];
@@ -72,7 +68,7 @@ const Login = (props) => {
             <Content>
                 <View style={{ height: height - (height * 0.1) }}>
                     <Image style={styles.logo} source={require('res/images/main-logo.png')} />
-                    <View styrle={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
+                    <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
                         {isError ? Errors : null}
                     </View>
                     <View style={{ flex: 1, backgroundColor: BODY.MAIN_COLOR, marginTop: 30, borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>

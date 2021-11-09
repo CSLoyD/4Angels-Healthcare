@@ -1,1 +1,1 @@
-export const api_url = "https://www.4angelshc.com/employee-scheduling";
+export const api_url = "https://www.4angelshc.com/employee-scheduling/";

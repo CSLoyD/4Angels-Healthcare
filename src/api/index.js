@@ -2,21 +2,17 @@ import {api_url} from './constants';
 
 export  const api = {
     auth:(mod,action,params)=>{
-            let param  = 'param='+ encodeURI(params);
-                param  = param.replace(/&+$/, ''); 
              return fetch(`${api_url+mod+action}`,{
                 method: 'POST',
-                headers: {Accept: 'application/json','Content-Type': 'application/x-www-form-urlencoded','AuthStr':'xxx'},
-                body:param
+                headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'},
+                body:params
              }); 
     },
     post:(mod,action,params,token='')=>{
-       let param  = 'param='+ encodeURI(params);
-       param  = param.replace(/&+$/, ''); 
          return fetch(`${api_url+mod+action}`,{
             method: 'POST',
             headers: {Accept: 'application/json','Content-Type': 'application/x-www-form-urlencoded','authstr':token},
-            body:param
+            body:params
          }); 
     },
 
