@@ -35,7 +35,7 @@ const Login = (props) => {
             "username": username,
             "password": password,
         });
-        const response = await  api.auth('api/','EmployeeLogin',body);
+        const response = await  api.auth('reactapi/','LoginEmployee',body);
         let data = await response.json();
         if (response.status ===200) {
             if(data.stat === "Success") {
