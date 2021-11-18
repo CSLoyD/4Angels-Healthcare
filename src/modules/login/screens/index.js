@@ -31,10 +31,10 @@ const Login = (props) => {
     const _login = async() => {
         setIsFetching(true);
         setIsErrors(false);
-        const body = JSON.stringify({
+        const body = {
             "username": username,
             "password": password,
-        });
+        };
         const response = await  api.auth('reactapi/','LoginEmployee',body);
         let data = await response.json();
         if (response.status ===200) {
@@ -91,11 +91,6 @@ const Login = (props) => {
                             :(<Text dark xb>Login</Text>)
                             }
                         </Button>
-                        <View style={{ justifyContent: 'space-between' }}>
-                            <Button style={[styles.Button2, { margin: 0, width: "50%" }]} transparent light onPress={() => navigation.navigate('Registration')}>
-                                <Text light>Create New Account</Text>
-                            </Button>
-                        </View>
                     </View>
 
                 </View>
