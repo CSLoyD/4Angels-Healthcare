@@ -4,7 +4,8 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from  '@react-navigation/stack';
 
-import { initial_screen, main_screen } from './Screens';
+import {Footers} from './containers/Footer';
+import { initial_screen, main_screen, extra_screens } from './Screens';
 
 import { connect } from 'react-redux';
 import { BODY } from 'theme';
@@ -48,7 +49,34 @@ const MainScreen = main_screen.map((screen, idx) => {
             component={screen.component}
             options={({ route, navigation }) => ({
                 header: () => null,
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            })} />
+        )
+    }
+});
+
+//  Extra Screens
+const ExtraScreen = extra_screens.map((screen, idx) => {
+    if(screen.header) {
+        return (
+            <Stack.Screen
+            key={idx}
+            name={screen.name}
+            component={screen.component}
+            options={({ route, navigation }) => ({
+                header: () => null,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            })} />
+        )
+    } else {
+        return (
+            <Stack.Screen
+            key={idx}
+            name={screen.name}
+            component={screen.component}
+            options={({ route, navigation }) => ({
+                header: () => null,
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             })} />
         )
     }
@@ -61,9 +89,15 @@ const Routes = (props) => {
     return (
         <NavigationContainer onStateChange={state => state.index == 0 ? StatusBar.setHidden(false) : StatusBar.setHidden(false) } >
             <Stack.Navigator>
-                {
-                    is_loggedIn ? MainScreen : InitialScreen
-                }
+            {
+                is_loggedIn ?
+                <>
+                {MainScreen}
+                {ExtraScreen}
+                </>
+                :
+                InitialScreen
+            }
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -5,6 +5,7 @@ import { connect, useDispatch } from 'react-redux';
 import {BODY } from "theme";
 import { styles } from '../styles';
 import Menu from '../components/Menu';
+import Footers from 'containers/Footers';
 
 // Temporary Logout
 import {reset} from 'modules/login/slices/LoginSlice';
@@ -28,15 +29,9 @@ const Home = (props) => {
             }>
                 <Menu />
             </Content>
-            <Fab
-                active={state}
-                direction="up"
-                containerStyle={styles.FabContainerSTyle}
-                style={styles.Fab}
-                position="bottomRight"
-                onPress={() => dispatch(reset({}))}>
-                <Icon name="log-out" />
-            </Fab>
+            
+            <Footers navigation={navigation} />
+
         </Container>
     );
 }

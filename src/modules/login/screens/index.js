@@ -91,6 +91,10 @@ const Login = (props) => {
                             :(<Text dark xb>Login</Text>)
                             }
                         </Button>
+
+                        <Button style={[styles.Button2, { margin: 0, width: "50%" }]} transparent light onPress={() => navigation.navigate('Registration')}>
+                            <Text xb darkgray>DON'T HAVE ACCOUNT?</Text>
+                        </Button>
                     </View>
 
                 </View>

@@ -7,7 +7,7 @@ export  const api = {
 
          return fetch(`${api_url+mod+action}`,{
             method: 'POST',
-            headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'},
+            headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded','authstr':'xxx'},
             body:JSON.stringify(params)
          }); 
     },
@@ -16,7 +16,7 @@ export  const api = {
       params.reactV = reactV;
          return fetch(`${api_url+mod+action}`,{
             method: 'POST',
-            headers: {Accept: 'application/json','Content-Type': 'application/x-www-form-urlencoded','authstr':token},
+            headers: {Accept: 'application/json','Content-Type': 'application/x-www-form-urlencoded'},
             body:JSON.stringify(params)
          }); 
     },
@@ -26,7 +26,7 @@ export  const api = {
       params.reactV = reactV;
          return fetch(`${api_url+mod+action}`,{
             method: 'POST',
-            headers: {Accept: 'application/json','Content-Type': 'multipart/form-data','authstr':token},
+            headers: {Accept: 'application/json','Content-Type': 'multipart/form-data'},
             body:JSON.stringify(params)
          }); 
     },
