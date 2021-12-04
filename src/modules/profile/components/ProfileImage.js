@@ -26,6 +26,7 @@ const ProfileImage = (props) => {
                     cropping: true,
                     freeStyleCropEnabled: true,
                     cropperCircleOverlay: true,
+                    includeBase64: true,
                 })
                     .then((image) => {
                         onFileSelected(image);
@@ -44,8 +45,10 @@ const ProfileImage = (props) => {
                     cropping: true,
                     freeStyleCropEnabled: true,
                     cropperCircleOverlay: true,
+                    includeBase64: true,
                 })
                     .then((image) => {
+                        console.log(image);
                         onFileSelected(image);
                         refRBSheet.current.close();
                     })

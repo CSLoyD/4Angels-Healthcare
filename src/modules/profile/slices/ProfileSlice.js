@@ -7,13 +7,13 @@ export const getProfile = createAsyncThunk(
     'profile/getProfile',
     async ({ body,token}, thunkAPI) => {
       try {
-        const response = await  api.post(`reactapi/`,'fetchProfile',body,token);
-        let data = await response.json();
+        const response = await api.post(`reactapi/`,'fetchProfile',body,token);
+        let data = await response.data.datas;
         if (response.status === 200) {
           return {
             status : true,
             msg    : 'Data found',
-            apiRet : data.datas
+            apiRet : data,
           };
         } else {
           return  thunkAPI.dispatch(logOut({}));

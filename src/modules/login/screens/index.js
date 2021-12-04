@@ -31,12 +31,12 @@ const Login = (props) => {
     const _login = async() => {
         setIsFetching(true);
         setIsErrors(false);
-        const body = {
-            "username": username,
-            "password": password,
-        };
-        const response = await  api.auth('reactapi/','LoginEmployee',body);
-        let data = await response.json();
+
+        const body = new FormData();
+        body.append('username',username);
+        body.append('password',password);
+        const response = await  api.post('reactapi/','LoginEmployee',body);
+        let data = await response.data;
         if (response.status ===200) {
             if(data.stat === "Success") {
                 setIsFetching(false);

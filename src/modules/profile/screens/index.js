@@ -17,9 +17,8 @@ const Profile = (props) => {
     },[]);
 
     const _getProfile = async () =>{
-        const body = {
-            "employee_id": props.EMPLOYEE
-        }
+        const body = new FormData();
+        body.append('employee_id',props.EMPLOYEE);
         dispatch(getProfile({body:body,token:props.TOKEN}));
     }
 

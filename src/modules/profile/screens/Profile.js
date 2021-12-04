@@ -35,13 +35,16 @@ const Profile = (props) => {
    
         const body = new FormData();
         if (localFile!==null) {
+            let pathParts   = localFile.path.split('/');
+            const name = pathParts[pathParts.length - 1];
             let file = {
-                   uri: localFile.path,
-                   type: localFile.mime,
-                   name: localFile.modificationDate,
-                   size: localFile.size
+                   uri  : localFile.path,
+                   type : localFile.mime,
+                   size : localFile.size,
+                   data : localFile.data,
+                   name : name,
             }
-            body.append('file',localFile, file);
+            body.append('file', JSON.stringify(file));
         }
         body.append('username',_username);
         body.append('firstname',_firstname);
@@ -51,9 +54,9 @@ const Profile = (props) => {
         body.append('address',_address);
         body.append('employee_id',employee_id);
 
-        const response = await  api.postfile('reactapi/','updateProfile',body);
-        let data = await response.json();
-        console.log(data);
+        const response = await api.post('reactapi/','updateProfile',body);
+        let data = await response.data;
+        console.log(data)
         return
         if (response.status ===200) {
             setisSaving(false);
@@ -74,7 +77,6 @@ const Profile = (props) => {
              setErrors(data.msg);
             }
         } else {
-            console.log('test');
             setisSaving(false);
             dispatch(reset({}));
         }
