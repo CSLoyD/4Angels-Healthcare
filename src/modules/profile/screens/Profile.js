@@ -28,7 +28,7 @@ const Profile = (props) => {
     const [isError, setIsErrors] = useState(false);
     const [localFile, setLocalFile] = useState(null);
 
-    const saveChanges = async () => {
+    const saveChanges = async() => {
         setErrors([]);
         setisSaving(true);
         setIsErrors(false);
@@ -56,25 +56,23 @@ const Profile = (props) => {
 
         const response = await api.post('reactapi/','updateProfile',body);
         let data = await response.data;
-        console.log(data)
-        return
-        if (response.status ===200) {
+        if (response.status === 200) {
             setisSaving(false);
             if (data.stat === "Success") {
                 setLocalFile(null);
                 setIsErrors(true);
-                setErrors(data.ret.msg);
+                setErrors([data.msg]);
                 let newData = {...props.USERDATA}
                 newData.username = _username;
                 // if (localFile!==null) {
                 //     newData.Image = data.ret.filename;
                 // }
-
                 await dispatch(assignState({slicekey:'logindata',value:newData}));
+                navigation.navigate('Profile');
             }else{
              setIsErrors(true);
              setisSaving(false);
-             setErrors(data.msg);
+             setErrors([data.msg]);
             }
         } else {
             setisSaving(false);
@@ -87,11 +85,11 @@ const Profile = (props) => {
     }
 
     let Returns=[];
-    if (isError) {
+    if (isError) {; 
         Returns = errors.map((err, idx) => {
-            return (
-                <Text danger sm b key={idx} >{err}</Text> 
-            )
+                return (
+                    <Text sm b key={idx} >{err}</Text>
+                )
         })
     }
 
@@ -106,8 +104,8 @@ const Profile = (props) => {
                <ProfileImage localFile={localFile} onFileSelected={onFileSelected}  IMAGE={(profile_image !== "") ? profile_image : DEFAULT_IMAGE_URI }/>
 
                 <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
-                        {errors.length>1? <Text danger sm b  > Error Saving of changes</Text> : null}
-                        {errors.length==1? Returns : null}
+                        {/* {isError? <Text danger sm b  > Error Saving of changes</Text> : null} */}
+                        {isError? Returns : null}
                    </View>
                 <View style={{ flexDirection: 'column', padding: 10 }}>
 

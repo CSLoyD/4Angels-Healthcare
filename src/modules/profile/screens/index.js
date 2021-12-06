@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Container, Content} from 'native-base';
 import { RefreshControl } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { connect, useDispatch } from 'react-redux';
 import { BODY } from "theme";
 import ProfileDetails from '../components/ProfileDetails';
@@ -13,10 +14,14 @@ const Profile = (props) => {
     const navigation = props.navigation;
     const {details,isFetching } = props.profile;
     useEffect(()=>{
-        _getProfile()
-    },[]);
+        const fetched = navigation.addListener('focus', () => {
+            _getProfile()
+        });
+        return fetched;
+    },[navigation]);
 
-    const _getProfile = async () =>{
+
+    const _getProfile = async() =>{
         const body = new FormData();
         body.append('employee_id',props.EMPLOYEE);
         dispatch(getProfile({body:body,token:props.TOKEN}));
