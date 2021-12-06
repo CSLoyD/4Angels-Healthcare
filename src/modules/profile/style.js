@@ -79,6 +79,7 @@ export const styles = StyleSheet.create({
       },
       userCityRow: {
         backgroundColor: 'transparent',
+        width:'80%',
       },
       userCityText: {
         color: '#fff',

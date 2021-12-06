@@ -6,6 +6,7 @@ import { styles } from '../style';
 import { BODY } from "theme";
 import { Bubbles } from 'react-native-loader';
 import {api} from 'api';
+import {redirection} from 'api/helpers';
 import {reset,assignState} from 'modules/login/slices/LoginSlice';
 
 
@@ -28,25 +29,25 @@ const ResetPass = (props) => {
         setErrors([]);
         setisSaving(true);
         setIsErrors(false);
-        const  body = JSON.stringify({
-            CurrentPassword: currentpass,
-            NewPassword: newpass,
-            ConfirmPassword: confirmpass,
-            employee_id: employee_id,
-        });
+        const body = new FormData();
+        body.append('employee_id',employee_id);
+        body.append('currentPass',currentpass);
+        body.append('newPass',newpass);
+        body.append('confPass',confirmpass);
 
-        const response = await  api.post('settings/','resetPassword',body,token);
-        let data = await response.json();
+        const response = await api.post('reactapi/','profileUpdatePass',body);
+        let data = await response.data;
         if (response.status ===200) {
             setisSaving(false);
-            if (data.ret.status) {
+            if (data.stat === "Success") {
                 setIsErrors(true);
-                setErrors(data.ret.msg);
+                setErrors([data.msg]);
                 _clear();
-            }else{
-             setIsErrors(true);
-             setisSaving(false);
-             setErrors(data.ret.msg);
+                redirection(navigation,'Profile',1000);
+            } else {
+                setIsErrors(true);
+                setisSaving(false);
+                setErrors([data.msg]);
             }
         } else {
             setisSaving(false);
@@ -73,29 +74,28 @@ const ResetPass = (props) => {
     return (
         <Container>
             <Header style={{ backgroundColor: BODY.THEME }} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
-                <View style={{ justifyContent: 'center', width: '100%' }}>
-                     <Text xb dark style={{ alignSelf: 'flex-start' }}>RESET PASSWORD</Text>
+                <View style={{ justifyContent: 'center',width:'100%', backgroundColor:'#ededed' }}>
+                    <Text xb dark style={{ fontSize: 16, textAlign: 'center' }}>RESET PASSWORD</Text>
                 </View>
             </Header>
             <Content>
 
-                 <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
-                        {errors.length>1? <Text danger sm b  > Error Saving of changes</Text> : null}
-                        {errors.length==1? Returns : null}
-                   </View>
+                <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
+                    {isError? Returns : null}
+                </View>
                 <View style={{ flexDirection: 'column', padding: 10 }}>
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}> CURRENT PASSWORD</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}> CURRENT PASSWORD</Text>
 
                     <Item style={[styles.Item,{borderColor: isError && currentpass=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="currentpass" value={currentpass} onChangeText={(val)=>setcurrentpass(val)} secureTextEntry />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>NEW PASSWORD</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>NEW PASSWORD</Text>
                     <Item style={[styles.Item,{borderColor: isError && newpass=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="newpass" value={newpass}  onChangeText={(val)=>setnewpass(val)}  secureTextEntry/>
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>CONFIRM NEW PASSWORD</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>CONFIRM NEW PASSWORD</Text>
                     <Item style={[styles.Item,{borderColor: isError && confirmpass=="" ? "red":"#000"}]}>
                         <Input placeholder='' name="confirmpass" value={confirmpass} onChangeText={(val)=>setconfirmpass(val)}  secureTextEntry/>
                     </Item>

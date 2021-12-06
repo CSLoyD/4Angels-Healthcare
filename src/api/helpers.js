@@ -33,10 +33,12 @@ export const truncate= (str, n)=>{
     return status === 'granted';
 }
 
-export const  timeout= (ms)=> {
+export const timeout= (ms)=> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-
-
+export const redirection = (navigation,page,ms) => {
+    return setTimeout(() => {
+        navigation.navigate(page);
+        }, ms);
+}

@@ -6,6 +6,7 @@ import { styles } from '../style';
 import { BODY } from "theme";
 import { Bubbles } from 'react-native-loader';
 import {api} from 'api';
+import {redirection} from 'api/helpers';
 import {reset,assignState} from 'modules/login/slices/LoginSlice';
 import ProfileImage from '../components/ProfileImage';
 import { DEFAULT_IMAGE_URI } from '../../../api/constants';
@@ -68,7 +69,7 @@ const Profile = (props) => {
                 //     newData.Image = data.ret.filename;
                 // }
                 await dispatch(assignState({slicekey:'logindata',value:newData}));
-                navigation.navigate('Profile');
+                redirection(navigation,'Profile',1000);
             }else{
              setIsErrors(true);
              setisSaving(false);
@@ -104,57 +105,61 @@ const Profile = (props) => {
                <ProfileImage localFile={localFile} onFileSelected={onFileSelected}  IMAGE={(profile_image !== "") ? profile_image : DEFAULT_IMAGE_URI }/>
 
                 <View style={[styles.errorCont, { backgroundColor: (isError) ? BODY.bg_LIGHT_GRAY : 'transparent', }]}>
-                        {/* {isError? <Text danger sm b  > Error Saving of changes</Text> : null} */}
                         {isError? Returns : null}
                    </View>
                 <View style={{ flexDirection: 'column', padding: 10 }}>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>USERNAME</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>USERNAME</Text>
                     <Item style={[styles.Item,{borderColor: isError && _username=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="_username" value={_username} onChangeText={(val)=>setusername(val)} />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>FIRST NAME</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>FIRST NAME</Text>
                     <Item style={[styles.Item,{borderColor: isError && _firstname=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="_firstname" value={_firstname} onChangeText={(val)=>setfirstname(val)} />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>LAST NAME</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>LAST NAME</Text>
                     <Item style={[styles.Item,{borderColor: isError && _lastname=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="_lastname" value={_lastname} onChangeText={(val)=>setlastname(val)} />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>EMAIL ADDRESS</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>EMAIL ADDRESS</Text>
                     <Item style={[styles.Item,{borderColor: isError && _email=="" ? "red":"#000"}]}>
                         <Input placeholder=''  name="_email" value={_email}  onChangeText={(val)=>setemail(val)} />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>MOBILE NUMBER</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>MOBILE NUMBER</Text>
                     <Item style={[styles.Item,{borderColor: isError && _phone=="" ? "red":"#000"}]}>
                         <Input placeholder='' name="mobile" value={_phone} onChangeText={(val)=>setphone(val)} />
                     </Item>
 
-                    <Text xb sm dark style={{ alignSelf: 'flex-start' }}>HOME ADDRESS</Text>
+                    <Text xb sm dark style={{ alignSelf: 'flex-start',marginBottom:10 }}>HOME ADDRESS</Text>
                     <Item style={[styles.Item,{borderColor: isError && _address=="" ? "red":"#000"}]}>
                         <Input placeholder='' name="_address" value={_address}  onChangeText={(val)=>setaddress(val)} />
                     </Item>
+                    <Item>
+                        <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.RED_COLOR }]} onPress={()=>navigation.navigate("Profile")}>
+                            <Text xb>CANCEL</Text>
+                        </Button>
+                    </Item>
+
+                    <Item>
+                        <Button style={[styles.Button, { backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.YELLOW_COLOR }]} onPress={()=>navigation.navigate("ResetPass")}>
+                            <Text xb>RESET PASSWORD</Text>
+                        </Button>
+                    </Item>
+
+                    <Item>
+                        <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.MAIN_COLOR }]} onPress={() => isSaving?null:saveChanges()}>
+                            {isSaving ? (<Bubbles size={10} color="fff" />)
+                            : (<Text light xb> UPDATE PROFILE </Text>)
+                            }
+                        </Button>
+                    </Item>
+
                 </View>
             </Content>
-
-            <View>
-                <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.RED_COLOR }]} onPress={()=>navigation.navigate("Profile")}>
-                    <Text xb>CANCEL</Text>
-                </Button>
-
-                <Button style={[styles.Button, { backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.YELLOW_COLOR }]} onPress={()=>navigation.navigate("ResetPass")}>
-                    <Text xb>RESET PASSWORD</Text>
-                </Button>
-                <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.MAIN_COLOR }]} onPress={() => isSaving?null:saveChanges()}>
-                    {isSaving ? (<Bubbles size={10} color="fff" />)
-                    : (<Text light xb> UPDATE PROFILE </Text>)
-                    }
-                </Button>
-            </View>
 
         </Container>
     );
