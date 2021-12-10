@@ -4,13 +4,13 @@ import { Container, Fab, Icon, Content} from 'native-base';
 import { connect, useDispatch } from 'react-redux';
 import {BODY } from "theme";
 import { styles } from '../styles';
-import Menu from '../components/Menu';
+import Facilities from '../components/Facilities';
 import Footers from 'containers/Footers';
 
 // Temporary Logout
 import {reset} from 'modules/login/slices/LoginSlice';
 
-const Home = (props) => {
+const FacilitiesScreen = (props) => {
     const dispatch = useDispatch()
     const [refreshing, setrefreshing] = useState(false);
     const navigation = props.navigation;
@@ -27,7 +27,7 @@ const Home = (props) => {
                     progressBackgroundColor={'#fff'}
                 />
             }>
-                <Menu navigation={navigation}/>
+                <Facilities navigation={navigation}/>
             </Content>
             
             <Footers navigation={navigation} />
@@ -37,5 +37,5 @@ const Home = (props) => {
 }
 
 
-export default Home;
+export default FacilitiesScreen;
 

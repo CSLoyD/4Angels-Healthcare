@@ -6,6 +6,7 @@ import Registration from 'modules/login/screens/Registration';
 // Imports for Main Screen
 import Home from 'modules/home/screens';
 import Profile from 'modules/profile/screens';
+import Facilities from 'modules/facilities/screens';
 
 // Extra Screens
 import UpdateProfile from 'modules/profile/screens/Profile';
@@ -34,6 +35,12 @@ export const main_screen = [
     {
         name: 'Profile',
         component: Profile,
+        header: false,
+        footer: true,
+    },
+    {
+        name: 'Facilities',
+        component: Facilities,
         header: false,
         footer: true,
     },

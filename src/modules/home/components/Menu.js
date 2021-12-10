@@ -6,7 +6,8 @@ import { Dimensions, Image } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const Menu = () => {
+const Menu = (props) => {
+    const {navigation} = props;
     return (
         <>
         <Container >
@@ -36,7 +37,8 @@ const Menu = () => {
                                     <CardItem style={{backgroundColor: '#0086b3', height: 150, borderTopRightRadius: 20, borderTopLeftRadius: 20, borderBottomRightRadius: 20, borderBottomLeftRadius: 20}}>
                                         <Body style={styles.container}>
                                             <Text>
-                                                <Button style={[styles.Button2, { margin: 0}]} transparent light onPress={() => console.log('Facilities') }>
+                                                {/* <Button style={[styles.Button2, { margin: 0}]} transparent light onPress={() => console.log('Facilities') }> */}
+                                                <Button style={[styles.Button2, { margin: 0}]} transparent light onPress={() => navigation.navigate('Facilities') }>
                                                     <Text light>Facilities</Text>
                                                 </Button>
                                             </Text>                                    
