@@ -19,8 +19,8 @@ const Menu = (props) => {
                         </Item>
                     </View>
 
-                    <View style={{backgroundColor: 'red', height: 550, backgroundColor: '#fff', borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>
-                        <Card style={{marginTop: 100, marginLeft: 35}} noShadow>
+                    <View style={{height: 550, backgroundColor: '#fff', borderTopRightRadius: 50, borderTopLeftRadius: 50 }}>
+                        <Card style={{marginTop: 100, marginLeft: 35,borderColor:'transparent'}} noShadow>
                             <View style={{flexDirection:'row', flexWrap:'wrap'}}>
                                 <TouchableOpacity style={{width: 150, marginRight: 20, marginBottom: 20}} onPress={() => console.log('Shifts')} activeOpacity={1}>
                                     <CardItem style={{backgroundColor: '#0086b3',  height: 150, borderTopRightRadius: 20, borderTopLeftRadius: 20, borderBottomRightRadius: 20, borderBottomLeftRadius: 20}}>
