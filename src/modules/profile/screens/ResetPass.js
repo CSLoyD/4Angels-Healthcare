@@ -103,10 +103,10 @@ const ResetPass = (props) => {
                 </View>
             </Content>
 
-            <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.RED_COLOR }]} onPress={()=>navigation.navigate("UpdateProfile")}>
+            <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK }]} onPress={()=>navigation.navigate("UpdateProfile")}>
                 <Text xb>CANCEL</Text>
             </Button>
-            <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.MAIN_COLOR,marginBottom:30 }]} onPress={() => isSaving?null:saveChanges()}>
+            <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.BLACK,marginBottom:30 }]} onPress={() => isSaving?null:saveChanges()}>
                 {isSaving ? (<Bubbles size={10} color="fff" />)
                  :(<Text light xb> SAVE NEW PASSWORD </Text>)}
             </Button>
