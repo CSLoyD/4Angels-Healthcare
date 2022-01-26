@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 import { StatusBar, Platform } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import OfflineModal from 'containers/OfflineModal';
+import UpdateAppModal from 'containers/UpdateAppModal';
+import {api} from 'api';
+
 import {
     persistStore,
     persistReducer,
@@ -44,17 +47,50 @@ const persistor = persistStore(store);
 
 export default () => {
     const [isOnline, setIsOnline] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(true);
     useEffect(() => {
         SplashScreen.hide();
     }, []);
+
+    const checkVersion = async() => {
+        const body = new FormData();
+        const response = await api.post('reactapi/','checkVersion',body);
+        let data = await response.data;
+        if (response.status ===200) {
+            if(data.stat === "Success") {
+                setIsUpdated(true);
+            } else {
+                setIsUpdated(false);
+            }
+        } else {
+            setIsUpdated(false);
+        }
+    }
 
     useEffect(() => {
         if(Platform.OS === 'android') {
             NetInfo.addEventListener(isConnected => {
                 if(isConnected.isConnected) {
+                    // (async () => {
+                    //     const body = new FormData();
+                    //     const response = await api.post('reactapi/','checkVersion',body);
+                    //     let data = await response.data;
+                    //     if (response.status ===200) {
+                    //         if(data.stat === "Success") {
+                    //             setIsUpdated(true);
+                    //         } else {
+                    //             setIsUpdated(false);
+                    //         }
+                    //     } else {
+                    //         setIsUpdated(false);
+                    //     }
+                    // })()
+                    
                     setIsOnline(true);
+                    checkVersion();
                 } else {
                     setIsOnline(false);
+                    setIsUpdated(false);
                 }
             });
         }
@@ -65,7 +101,8 @@ export default () => {
             <PersistGate loading={null} persistor={persistor}>
                 <React.Fragment>
                     {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-                    {isOnline ? (<Routes />) : (<OfflineModal />)}
+
+                    {isOnline ? isUpdated ? (<Routes />) : (<UpdateAppModal />) : (<OfflineModal />)}
                     <FlashMessage position="top" /> 
                 </React.Fragment>
             </PersistGate>
