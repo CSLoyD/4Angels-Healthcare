@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
-const OfflineModal = () => {
+const UpdateAppModal = () => {
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -11,7 +11,7 @@ const OfflineModal = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>You are offline.</Text>
+            <Text style={styles.modalText}>Outdated! Please update your App.</Text>
           </View>
         </View>
       </Modal>
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OfflineModal;
+export default UpdateAppModal;
