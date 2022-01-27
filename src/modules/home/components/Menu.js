@@ -30,6 +30,7 @@ const Menu = (props) => {
                                                     <Text light>Shifts</Text>
                                                 </Button>
                                             </Text>
+                                            
                                         </Body>
                                     </CardItem>
                                 </TouchableOpacity>

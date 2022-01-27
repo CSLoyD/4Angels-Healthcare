@@ -12,6 +12,7 @@ import {reset} from 'modules/login/slices/LoginSlice';
 const ProfileDetails = (props) => {
     const dispatch = useDispatch();
     const {details, navigation} = props;
+    console.log(details);
     return (
         <Card containerStyle={styles.cardContainer}>
             <View style={styles.container}>
