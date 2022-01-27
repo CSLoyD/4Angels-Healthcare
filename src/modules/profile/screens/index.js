@@ -32,7 +32,7 @@ const Profile = (props) => {
             <Container backgroundColor='#FFF'>
                 <Content refreshControl={
                     <RefreshControl
-                        onRefresh={()=>getProfile()}
+                        onRefresh={()=>_getProfile()}
                         refreshing={isFetching}
                         colors={[BODY.ORANGE_COLOR]} //android
                         tintColor={BODY.ORANGE_COLOR} //ios
