@@ -93,6 +93,16 @@ export default () => {
                     setIsUpdated(false);
                 }
             });
+        } else if(Platform.OS === 'ios') {
+            NetInfo.addEventListener(isConnected => {
+                if(isConnected.isConnected) {
+                    setIsOnline(true);
+                    checkVersion();
+                } else {
+                    setIsOnline(false);
+                    setIsUpdated(false);
+                }
+            });
         }
     }, []);
 
