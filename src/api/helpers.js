@@ -18,20 +18,16 @@ export const truncate= (str, n)=>{
 
 
  
- export const hasAndroidPermission= async ()=> {
-    const permission = PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
+ export const hasFilePermission= async ()=> {
+    const permission = [PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE];
     const hasPermission = await PermissionsAndroid.check(permission);
-    if (hasPermission) {
-     return true;
+    return (hasPermission)?true:await PermissionsAndroid.requestMultiple(permission);
+ }
+    export const hasCameraPermission = async ()=> {
+        const permission = PermissionsAndroid.PERMISSIONS.CAMERA;
+        const hasPermission = await PermissionsAndroid.check(permission);
+        return (hasPermission)?true:await PermissionsAndroid.request(permission);
     }
-
-    const status = await PermissionsAndroid.request(permission,
-        {
-        title   : 'Permission to access Albums',
-        message : 'We need your permission to access your albums!',
-        });
-    return status === 'granted';
-}
 
 export const timeout= (ms)=> {
     return new Promise(resolve => setTimeout(resolve, ms));

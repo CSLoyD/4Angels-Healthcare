@@ -8,7 +8,7 @@ import { BODY, HEADER } from "theme";
 import ImagePicker from 'react-native-image-crop-picker';
 import { DEFAULT_IMAGE_URI } from 'api/constants';
 import RBSheet from "react-native-raw-bottom-sheet";
-
+import {hasFilePermission, hasCameraPermission} from 'api/helpers';
 
 
 const ProfileImage = (props) => {
@@ -32,7 +32,10 @@ const ProfileImage = (props) => {
                         onFileSelected(image);
                         refRBSheet.current.close();
                     })
-                    .catch((error) => { });
+                    .catch((error) => {
+                        console.log(error)
+                        hasCameraPermission();
+                     });
             },
         },
         {
@@ -52,7 +55,9 @@ const ProfileImage = (props) => {
                         onFileSelected(image);
                         refRBSheet.current.close();
                     })
-                    .catch((error) => { });
+                    .catch((error) => {
+                        hasFilePermission();
+                     });
             },
         },
     ];
