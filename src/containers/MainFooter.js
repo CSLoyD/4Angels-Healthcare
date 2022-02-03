@@ -4,7 +4,7 @@ import { BODY, HEADER } from "theme";
 import { Text } from 'components'
 import { FOOTER } from 'theme';
 
-const Footers = (props) => {
+const MainFooter =({props})=>{
     const { navigation } = props;
     const [state,setState] = useState(false);
 
@@ -32,6 +32,6 @@ const Footers = (props) => {
             </Fab>
         </Footer>
     );
-};
+}
 
-export default Footers;
+export default MainFooter;

@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from  '@react-navigation/stack';
-
-import {Footers} from './containers/Footer';
 import { initial_screen, main_screen, extra_screens } from './Screens';
+
+import MainHeader from './containers/Header';
+import MainFooter from './containers/MainFooter';
 
 import { connect } from 'react-redux';
 import { BODY } from 'theme';
@@ -37,7 +38,7 @@ const MainScreen = main_screen.map((screen, idx) => {
             name={screen.name}
             component={screen.component}
             options={({ route, navigation }) => ({
-                header: () => null,
+                header: () => screen.header ? <MainHeader props={{ navigation }} /> : null,
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
             })} />
         )
@@ -64,7 +65,7 @@ const ExtraScreen = extra_screens.map((screen, idx) => {
             name={screen.name}
             component={screen.component}
             options={({ route, navigation }) => ({
-                header: () => null,
+                header: () => screen.header ? <MainHeader props={{ navigation }} /> : null,
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             })} />
         )
