@@ -5,7 +5,6 @@ import { connect, useDispatch } from 'react-redux';
 import {BODY } from "theme";
 import { styles } from '../styles';
 import Facilities from '../components/Facilities';
-import Footers from 'containers/Footers';
 
 // Temporary Logout
 import {reset} from 'modules/login/slices/LoginSlice';
