@@ -28,8 +28,6 @@ const FacilitiesScreen = (props) => {
             }>
                 <Facilities navigation={navigation}/>
             </Content>
-            
-            <Footers navigation={navigation} />
 
         </Container>
     );
