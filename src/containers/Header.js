@@ -1,16 +1,36 @@
-import React from "react";
-import { Header, Button, Icon, Left, Right, Body } from "native-base";
+import React, { useState } from "react";
+import { Header, Icon, Fab } from "native-base";
 import { BODY, HEADER } from "theme";
 import { Text } from 'components'
 
-const Headers = (props) => {
-    const { left, body, right, bodyText ,navigation} = props;
+const MainHeader =({props})=>{
+    const { navigation } = props;
+    const [state,setState] = useState(false);
 
     return (
         <Header>
-            <Text>Header</Text>
+            <Fab
+                active={state}
+                direction="up"
+                containerStyle={{}}
+                style={{backgroundColor:'blue'}}
+                position="bottomLeft"
+                onPress={() => navigation.navigate('Home')}>
+                <Icon name="home" />
+            </Fab>
+
+            <Fab
+                active={state}
+                direction="up"
+                containerStyle={{}}
+                style={{backgroundColor:'blue'}}
+                position="bottomRight"
+                onPress={() => navigation.navigate('Profile')}>
+                <Icon name="user" type="AntDesign" />
+            </Fab>
         </Header>
     );
-};
+}
 
-export default Headers;
+
+export default MainHeader;

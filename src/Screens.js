@@ -29,20 +29,17 @@ export const main_screen = [
     {
         name: 'Home',
         component: Home,
-        header: false,
-        footer: true,
+        header: true,
     },
     {
         name: 'Profile',
         component: Profile,
-        header: false,
-        footer: true,
+        header: true,
     },
     {
         name: 'Facilities',
         component: Facilities,
-        header: false,
-        footer: true,
+        header: true,
     },
 ]
 
@@ -51,12 +48,10 @@ export const extra_screens = [
         name: 'UpdateProfile',
         component: UpdateProfile,
         header: false,
-        footer: false,
     },
     {
         name: 'ResetPass',
         component: ResetPass,
         header: false,
-        footer: false,
     },
 ]

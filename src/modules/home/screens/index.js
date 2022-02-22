@@ -5,7 +5,6 @@ import { connect, useDispatch } from 'react-redux';
 import {BODY } from "theme";
 import { styles } from '../styles';
 import Menu from '../components/Menu';
-import Footers from 'containers/Footers';
 
 // Temporary Logout
 import {reset} from 'modules/login/slices/LoginSlice';
@@ -29,8 +28,6 @@ const Home = (props) => {
             }>
                 <Menu navigation={navigation}/>
             </Content>
-            
-            <Footers navigation={navigation} />
 
         </Container>
     );
