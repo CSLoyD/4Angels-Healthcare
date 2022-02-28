@@ -74,6 +74,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-    <string>Camera Permission</string>
+	<string>Camera Permission</string>
 </dict>
 </plist>
