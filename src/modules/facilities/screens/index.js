@@ -10,7 +10,6 @@ import HeaderSearch from '../components/FacilitiesList';
 import Loading from '../components/LoadingIndicator';
 import Search from '../components/Search';
 import {getFacilities} from '../slices/FacilitiesSlice';
-import Footers from 'containers/Footers';
 
 const FacilitiesScreen = (props) => {
     const dispatch = useDispatch()
