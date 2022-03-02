@@ -7,6 +7,7 @@ import Registration from 'modules/login/screens/Registration';
 import Home from 'modules/home/screens';
 import Profile from 'modules/profile/screens';
 import Facilities from 'modules/facilities/screens';
+import Shifts from 'modules/shifts/screens';
 
 // Extra Screens
 import UpdateProfile from 'modules/profile/screens/Profile';
@@ -39,6 +40,11 @@ export const main_screen = [
     {
         name: 'Facilities',
         component: Facilities,
+        header: true,
+    },
+    {
+        name: 'Shifts',
+        component: Shifts,
         header: true,
     },
 ]
