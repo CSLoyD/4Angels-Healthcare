@@ -34,7 +34,7 @@ const Menu = (props) => {
                                         </Body>
                                     </CardItem>
                                 </TouchableOpacity> */}
-                                <TouchableOpacity style={{width: 150}} activeOpacity={1} onPress={() => console('Shifts') }>
+                                <TouchableOpacity style={{width: 150, marginRight: 20, marginBottom: 20}} onPress={() => navigation.navigate('Shifts') }>
                                     <CardItem style={{backgroundColor: '#0086b3', height: 150, borderTopRightRadius: 20, borderTopLeftRadius: 20, borderBottomRightRadius: 20, borderBottomLeftRadius: 20}}>
                                         <Body style={styles.container}>
                                             <Text>
