@@ -44,7 +44,7 @@ export default props => {
     if (props.t) style.fontFamily = 'Roboto-Thin';
     if (props.l) style.fontFamily = 'Roboto-Light';
     if (props.m) style.fontFamily = 'Roboto-Medium';
-    if (props.b) style.fontFamily = 'Roboto-Bold';
+    if (props.b) style.fontFamily = 'Roboto-Regular';
 
     // center
     if (props.center) style.alignSelf = 'center'
