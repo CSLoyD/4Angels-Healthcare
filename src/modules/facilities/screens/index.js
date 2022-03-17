@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RefreshControl } from 'react-native';
 import { Text} from 'components';
-import { SearchBar } from 'react-native-elements';
-import { Container, SafeAreaView, Content, Header, View, TextInput} from 'native-base';
+import { Container, Header} from 'native-base';
 import { connect, useDispatch } from 'react-redux';
 import {BODY } from "theme";
 import { styles } from '../styles';
@@ -12,8 +11,8 @@ import Search from '../components/Search';
 import {getFacilities} from '../slices/FacilitiesSlice';
 
 const FacilitiesScreen = (props) => {
-    const dispatch = useDispatch()
     const navigation = props.navigation;
+    const dispatch = useDispatch()
     const {facilitiesDetails,isFetching } = props;
 
     useEffect(()=>{
@@ -48,7 +47,7 @@ const FacilitiesScreen = (props) => {
                     <Text style={styles.H1} >Facilities</Text>
                 </Header>
                 <Search />
-                <HeaderSearch data={facilitiesDetails} />
+                <HeaderSearch data={facilitiesDetails} navigation={navigation}/>
                 </>
                 
                

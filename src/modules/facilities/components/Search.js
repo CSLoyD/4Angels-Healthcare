@@ -16,7 +16,6 @@ const Search = ()  => {
       onClearText={() => console.log(onClearText())}
       placeholder="Search Facility"
       placeholderTextColor="#888"
-      showLoading
       cancelButtonTitle="Cancel"
       cancelButtonProps={{}}
       onCancel={() => console.log(onCancel())}
