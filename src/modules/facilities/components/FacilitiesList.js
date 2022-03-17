@@ -12,7 +12,7 @@ import { alignContent, paddingTop } from 'styled-system';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { Icon } from 'react-native-elements';
 
-const HeaderSearch = ({data}) => {
+const HeaderSearch = ({data,navigation}) => {
     return (
         <View style={{marginBottom: 120}}>
            <SwipeListView
@@ -20,7 +20,9 @@ const HeaderSearch = ({data}) => {
             renderItem={({item}) => (
               <TouchableWithoutFeedback
                 onPress={() => {
-                  Alert.alert(`Name - ${item.facility_name}`);
+                  // Alert.alert(`Name - ${item.facility_name}`);
+                  navigation.navigate('schedules')
+                  
                 }}
               >
                 <View
