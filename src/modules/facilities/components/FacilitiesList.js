@@ -20,8 +20,10 @@ const HeaderSearch = ({data,navigation}) => {
             renderItem={({item}) => (
               <TouchableWithoutFeedback
                 onPress={() => {
-                  // Alert.alert(`Name - ${item.facility_name}`);
-                  navigation.navigate('schedules')
+                  // Alert.alert(`Name - ${item.facility_id}`);
+                  navigation.navigate('schedules',{
+                    itemId: item.facility_id,
+                  })
                   
                 }}
               >

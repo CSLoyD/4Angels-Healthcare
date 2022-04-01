@@ -17,14 +17,13 @@ const FacilitiesScreen = (props) => {
 
     useEffect(()=>{
         const fetched = navigation.addListener('focus', () => {
-            _getProfile()
+            getFacilitiesDetails()
         });
         return fetched;
     },[navigation]);
 
-    const _getProfile = async() =>{
+    const getFacilitiesDetails= async() =>{
         const body = new FormData();
-        body.append('employee_id',props.EMPLOYEE);
         dispatch(getFacilities({body:body,token:props.TOKEN}));
     }
 
@@ -60,8 +59,7 @@ const FacilitiesScreen = (props) => {
 const getStates = (state)=>{
     return{
         employee_id : state.login.logindata.employee_id,
-        TOKEN       : state.login.logindata.token,
-        USERDATA    : state.login.logindata,
+
         facilitiesDetails     : state.facilities.facilitiesDetails,
         isFetching : state.facilities.isFetching,
     }
