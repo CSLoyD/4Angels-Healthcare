@@ -1,27 +1,81 @@
 import * as React from "react";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {useSelector} from 'react-redux'
 import { Alert } from 'react-native';
 
 
-const CalendarComp = ()  => {
+
+const CalendarComp = ({data,stat,navigation})  => {
+
+    // if(!data){
+    //   Alert.alert(
+    //       "Information",
+    //       "No Shifts Available on this Facility",
+    //       [
+    //         {
+    //           text: "Ok",
+    //           onPress: () => navigation.navigate('Facilities'),
+    //           style: "cancel",
+    //         },
+    //       ],
+    //     );
+    //   return null
+    // } 
+
+    console.log(data);
+
+    const calendar22 = useSelector((state) => state.calendarSched.isFetching);
+    console.log(calendar22);
+    let markedDay = {};
+
+    if(data){
+      data.map((item) => {
+        markedDay[item.schedule_date] = {
+          selected: true,
+          marked: true,
+          selectedColor: "#56BBF1",
+          dotColor: '#FF1818'
+        };
+      });
+    }
+
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+
+
     return (
         <Calendar
-        markedDates={{
-            '2022-04-16': {selected: true, marked: true, selectedColor: 'blue'},
-            '2022-04-17': {marked: true},
-            '2022-04-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-            '2022-04-19': {disabled: true, disableTouchEvent: true}
-          }}
+        datas={today}
+        markedDates={ markedDay }
+        // markedDates={
+        //   {
+        //     '2022-04-16': {selected: true, marked: true, selectedColor: 'blue'},
+        //     '2022-04-17': {marked: true},
+        //     '2022-04-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+        //     '2022-04-19': {disabled: true, disableTouchEvent: true}
+        //   }}
           // Initially visible month. Default = Date()
-          current={'2022-03-01'}
+          current={today}
           // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
           minDate={'2012-05-10'}
           // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-          maxDate={'2023-03-01'}
+          maxDate={'2030-03-01'}
           // Handler which gets executed on day press. Default = undefined
-          onDayPress={day => {
-            console.log('selected day', day.dateString);
-            Alert.alert(`Selected: ${day.dateString}`);
+          onDayPress={(day,datas) => {
+            sample(day,datas);
           }}
           // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
           monthFormat={'yyyy MM'}
@@ -41,5 +95,12 @@ const CalendarComp = ()  => {
         />
     );
 }
+
+function sample(day,datas){
+  console.log('selected day', day.dateString);
+  console.log('selected day', datas);
+  Alert.alert(`Selected: ${day.dateString}`);
+}
+
 
 export default CalendarComp;
