@@ -74,8 +74,10 @@ const CalendarComp = ({data,stat,navigation})  => {
           // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
           maxDate={'2030-03-01'}
           // Handler which gets executed on day press. Default = undefined
-          onDayPress={(day,datas) => {
-            sample(day,datas);
+          onDayPress={(day) => {
+            navigation.navigate('AvailableShifts',{
+              date: day.dateString,
+            })
           }}
           // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
           monthFormat={'yyyy MM'}
