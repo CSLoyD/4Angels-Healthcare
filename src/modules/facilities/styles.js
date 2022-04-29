@@ -18,6 +18,14 @@ export const styles = StyleSheet.create({
     test2: {
         color: 'red',
     },
+    headline: {
+        textAlign: 'center', // <-- the magic
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginTop: 0,
+        width: 200,
+        backgroundColor: 'yellow',
+    }
     // facList:{
     //     borderWidth: 1,
     //     backgroundColor: "beige",
