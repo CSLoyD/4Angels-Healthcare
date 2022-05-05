@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { RefreshControl} from 'react-native';
+import { RefreshControl, Alert} from 'react-native';
 import { Text} from 'components';
 import { PricingCard, colors } from 'react-native-elements';
 import { Container, View,  Header, Item, Button,} from 'native-base';
@@ -92,6 +92,17 @@ const schedulesScreen = (props) => {
             if (data.stat === "Success") {
                 console.log(data);
                 console.log('success lage');
+                Alert.alert(
+                    "Success",
+                    "Request Shift Successful. Wait for the Approval",
+                    [
+                    {
+                        text: "Ok",
+                        onPress: () => navigation.navigate('Facilities'),
+                        style: "cancel",
+                    },
+                    ],
+                );
                 // redirection(navigation,'Profile',1000);
             }else{
             
@@ -99,9 +110,22 @@ const schedulesScreen = (props) => {
             }
         } else {
             console.log('Something Went Wrong');
+            Alert.alert(
+                "Error",
+                "Something Went Wrong",
+                [
+                {
+                    text: "Ok",
+                    onPress: () => navigation.navigate('Facilities'),
+                    style: "cancel",
+                },
+                ],
+            );
         }
         setisSaving(false);
     }
+    let schedDate = counterArr[0].schedule_date;
+    schedDate = stringDate(schedDate);
 
     return (
         <Container style={styles.Container} refreshControl={
@@ -113,26 +137,25 @@ const schedulesScreen = (props) => {
         />
         }>
 
-            {isFetching ? (
+            {isSaving ? (
               <Loading />
             ) : (
                 <>
                  <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
                     <Text style={styles.H1} >Schedules</Text>
                 </Header>
-                <View style={{flex: 1}} >
-                    <View style={{color: 'green',flex: 1,backgroundColor:'red'}} >
-                        <View style={{flex: 2, justifyContent: 'center',alignItems: 'center'}}>
-                            <Text style={{fontSize: 30}}>{counterArr[0].schedule_date}</Text>
+                <View style={{flex: 0.5,margin:20,shadowColor:'black',borderRadius: 10,borderWidth: 2,backgroundColor: '#abc9f5'}} >
+                    <View style={{color: 'green',flex: 1}} >
+                        <View style={{flex: 3, justifyContent: 'center',alignItems: 'center'}}>
+                            <Text style={{fontSize: 30,marginBottom: 10}}>{schedDate}</Text>
                             <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
-                                <Text>{start_time}</Text>
-                                <Text>{end_time}</Text>
+                                <Text style={{fontSize:20}}>{start_time} - {end_time}</Text>
                             </View>
                         </View>
-                        <View style={{flex:1,alignItems: 'center',backgroundColor:'green'}}>
+                        <View style={{flex:2,alignItems: 'center'}}>
                             <Text style={{fontSize:30}}>Request This Schedule?</Text>
                         </View>
-                        <View style={{flex:5,flexDirection: 'row',justifyContent: 'center',backgroundColor:'blue'}}>
+                        <View style={{flex:2,flexDirection: 'row',justifyContent: 'center'}}>
                             <Button style={[{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK,marginRight:30,marginLeft:30,width:100,flex:1,justifyContent: "center",alignItems: "center"}]} onPress={()=>navigation.goBack()}>
                                 <Text xb>CANCEL</Text>
                             </Button>
@@ -159,6 +182,11 @@ const getStates = (state)=>{
         isFetching : state.calendarSched.isFetching,
         schedStatus : state.calendarSched.calendarSchedDetails.stat
     }
+}
+
+function stringDate(date){
+    const d = new Date(date);
+    return d.toDateString();
 }
 
 export default connect(getStates,null)(schedulesScreen);
