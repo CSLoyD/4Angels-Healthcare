@@ -24,7 +24,7 @@
     "react": "17.0.2",
     "react-native": "0.66.2",
     "react-native-axios": "^0.17.1",
-    "react-native-calendario": "^3.1.0",
+    "react-native-calendario": "^0.3.1",
     "react-native-calendars": "^1.1275.0",
     "react-native-elements": "^3.4.2",
     "react-native-flash-message": "^0.2.0",

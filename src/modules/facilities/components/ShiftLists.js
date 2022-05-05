@@ -22,7 +22,7 @@ const ShiftLists = ({data,navigation}) => {
               <TouchableWithoutFeedback
                 onPress={() => {
                   // Alert.alert(`Name - ${item.facility_id}`);
-                  navigation.navigate('AvailableShifts',{
+                  navigation.navigate('Request',{
                     date: item.schedule_date,
                     schedID: item.schedule_id,
                     facID: item.fk_facility_id
@@ -47,7 +47,7 @@ const ShiftLists = ({data,navigation}) => {
                       fontSize: 20,
                     }}
                   >
-                    {item.time_start} - {item.time_end}
+                    {item.time_start_standard} - {item.time_end_standard}
                   </Text>
                 </View>
               </TouchableWithoutFeedback>

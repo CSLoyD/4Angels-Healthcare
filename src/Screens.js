@@ -14,6 +14,7 @@ import UpdateProfile from 'modules/profile/screens/Profile';
 import ResetPass from 'modules/profile/screens/ResetPass';
 import schedules from 'modules/facilities/screens/schedulesScreen';
 import AvailableShifts from 'modules/facilities/screens/AvailableShiftsScreen';
+import Request from 'modules/facilities/screens/Request';
 
 
 // Initial Screens
@@ -72,6 +73,11 @@ export const extra_screens = [
     {
         name: 'AvailableShifts',
         component: AvailableShifts,
+        header: true,
+    },
+    {
+        name: 'Request',
+        component: Request,
         header: true,
     },
 ]
