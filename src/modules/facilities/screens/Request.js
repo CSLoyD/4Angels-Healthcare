@@ -14,9 +14,9 @@ import {api} from 'api';
 
 const schedulesScreen = (props) => {
     const navigation = props.navigation;
-    const { date, schedID, facID} = props.route.params;
+    const { date, schedID, facID, schedStatus} = props.route.params;
     const dispatch = useDispatch()
-    const {schedDetails,isFetching,schedStatus} = props;
+    const {employee_id} = props;
 
     const [isSaving,setisSaving]  = useState(false);
 
@@ -83,6 +83,7 @@ const schedulesScreen = (props) => {
         body.append('FacilityID',facID);
         body.append('ScheduleID',schedID);
         body.append('ScheduleDate',date);
+        body.append('EmployeeID',employee_id);
 
         const response = await api.post('reactapi/','requestShift',body);
         console.log('response:',response)
@@ -105,8 +106,19 @@ const schedulesScreen = (props) => {
                 );
                 // redirection(navigation,'Profile',1000);
             }else{
-            
-            setErrors([data.msg]);
+                console.log('Something Went Wrong');
+                Alert.alert(
+                    "Error",
+                    data.msg,
+                    [
+                    {
+                        text: "Ok",
+                        onPress: () => navigation.navigate('Facilities'),
+                        style: "cancel",
+                    },
+                    ],
+                );
+            // setErrors([data.msg]);
             }
         } else {
             console.log('Something Went Wrong');
@@ -124,55 +136,106 @@ const schedulesScreen = (props) => {
         }
         setisSaving(false);
     }
+    
     let schedDate = counterArr[0].schedule_date;
     schedDate = stringDate(schedDate);
-
-    return (
-        <Container style={styles.Container} refreshControl={
-            <RefreshControl
-                onRefresh={() => console.log('nice')}
-                colors={[BODY.SECONDARY_COLOR]} //android
-                tintColor={BODY.SECONDARY_COLOR} //ios
-                progressBackgroundColor={'#fff'}
-        />
-        }>
-
-            {isSaving ? (
-              <Loading />
-            ) : (
-                <>
-                 <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
-                    <Text style={styles.H1} >Schedules</Text>
-                </Header>
-                <View style={{flex: 0.5,margin:20,shadowColor:'black',borderRadius: 10,borderWidth: 2,backgroundColor: '#abc9f5'}} >
-                    <View style={{color: 'green',flex: 1}} >
-                        <View style={{flex: 3, justifyContent: 'center',alignItems: 'center'}}>
-                            <Text style={{fontSize: 30,marginBottom: 10}}>{schedDate}</Text>
-                            <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
-                                <Text style={{fontSize:20}}>{start_time} - {end_time}</Text>
+    
+    if(schedStatus == 1){
+        return (
+            <Container style={styles.Container} refreshControl={
+                <RefreshControl
+                    onRefresh={() => console.log('nice')}
+                    colors={[BODY.SECONDARY_COLOR]} //android
+                    tintColor={BODY.SECONDARY_COLOR} //ios
+                    progressBackgroundColor={'#fff'}
+            />
+            }>
+    
+                {isSaving ? (
+                  <Loading />
+                ) : (
+                    <>
+                     <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
+                        <Text style={styles.H1} >Request Schedules </Text>
+                    </Header>
+                    <View style={{flex: 0.5,margin:20,shadowColor:'black',borderRadius: 10,borderWidth: 2,backgroundColor: '#abc9f5'}} >
+                        <View style={{color: 'green',flex: 1}} >
+                            <View style={{flex: 3, justifyContent: 'center',alignItems: 'center'}}>
+                                <Text style={{fontSize: 30,marginBottom: 10}}>{schedDate}</Text>
+                                <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
+                                    <Text style={{fontSize:20}}>{start_time} - {end_time}</Text>
+                                </View>
+                            </View>
+                            <View style={{flex:2,alignItems: 'center'}}>
+                                <Text style={{fontSize:30}}>Request This Schedule?</Text>
+                            </View>
+                            <View style={{flex:2,flexDirection: 'row',justifyContent: 'center'}}>
+                                <Button style={[{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK,marginRight:30,marginLeft:30,width:100,flex:1,justifyContent: "center",alignItems: "center"}]} onPress={()=>navigation.goBack()}>
+                                    <Text xb>CANCEL</Text>
+                                </Button>
+                                <Button style={[{ backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK,width:100,flex:1,marginRight:30,justifyContent: "center",alignItems: "center"}]} onPress={() => isSaving?null:requestShift()}>
+                                    <Text xb style={{textAlignVertical: "center",textAlign: "center"}}>Request</Text>
+                                </Button>
                             </View>
                         </View>
-                        <View style={{flex:2,alignItems: 'center'}}>
-                            <Text style={{fontSize:30}}>Request This Schedule?</Text>
-                        </View>
-                        <View style={{flex:2,flexDirection: 'row',justifyContent: 'center'}}>
-                            <Button style={[{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK,marginRight:30,marginLeft:30,width:100,flex:1,justifyContent: "center",alignItems: "center"}]} onPress={()=>navigation.goBack()}>
-                                <Text xb>CANCEL</Text>
-                            </Button>
-                            <Button style={[{ backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK,width:100,flex:1,marginRight:30,justifyContent: "center",alignItems: "center"}]} onPress={() => isSaving?null:requestShift()}>
-                                <Text xb style={{textAlignVertical: "center",textAlign: "center"}}>Request</Text>
-                            </Button>
+                    </View>
+                   
+    
+                    </>  
+                     
+                )}
+                   
+            </Container>
+        );
+    }else{
+        return (
+            <Container style={styles.Container} refreshControl={
+                <RefreshControl
+                    onRefresh={() => console.log('nice')}
+                    colors={[BODY.SECONDARY_COLOR]} //android
+                    tintColor={BODY.SECONDARY_COLOR} //ios
+                    progressBackgroundColor={'#fff'}
+            />
+            }>
+    
+                {isSaving ? (
+                  <Loading />
+                ) : (
+                    <>
+                     <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
+                        <Text style={styles.H1} >Swap Schedules </Text>
+                    </Header>
+                    <View style={{flex: 0.5,margin:20,shadowColor:'black',borderRadius: 10,borderWidth: 2,backgroundColor: '#abc9f5'}} >
+                        <View style={{color: 'green',flex: 1}} >
+                            <View style={{flex: 3, justifyContent: 'center',alignItems: 'center'}}>
+                                <Text style={{fontSize: 30,marginBottom: 10}}>{schedDate}</Text>
+                                <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
+                                    <Text style={{fontSize:20}}>{start_time} - {end_time}</Text>
+                                </View>
+                            </View>
+                            <View style={{flex:2,alignItems: 'center'}}>
+                                <Text style={{fontSize:30}}>Request This Schedule?</Text>
+                            </View>
+                            <View style={{flex:2,flexDirection: 'row',justifyContent: 'center'}}>
+                                <Button style={[{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK,marginRight:30,marginLeft:30,width:100,flex:1,justifyContent: "center",alignItems: "center"}]} onPress={()=>navigation.goBack()}>
+                                    <Text xb>CANCEL</Text>
+                                </Button>
+                                <Button style={[{ backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK,width:100,flex:1,marginRight:30,justifyContent: "center",alignItems: "center"}]} onPress={() => isSaving?null:requestShift()}>
+                                    <Text xb style={{textAlignVertical: "center",textAlign: "center"}}>Request</Text>
+                                </Button>
+                            </View>
                         </View>
                     </View>
-                </View>
-               
-
-                </>  
-                 
-            )}
-               
-        </Container>
-    );
+                   
+    
+                    </>  
+                     
+                )}
+                   
+            </Container>
+        );
+    }
+    
 }
 
 const getStates = (state)=>{

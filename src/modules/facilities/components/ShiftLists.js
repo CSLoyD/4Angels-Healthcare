@@ -25,21 +25,14 @@ const ShiftLists = ({data,navigation}) => {
                   navigation.navigate('Request',{
                     date: item.schedule_date,
                     schedID: item.schedule_id,
-                    facID: item.fk_facility_id
+                    facID: item.fk_facility_id,
+                    schedStatus: item.schedule_status
                   })
                   
                 }}
               >
                 <View
-                  style={{
-                    backgroundColor: '#f1f3f6',
-                    paddingVertical: 10,
-                    marginVertical: 4,
-                    borderRadius: 4,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}
+                  style={jewelStyle(item.schedule_status)}
                 >
                   <Text
                     style={{
@@ -106,6 +99,31 @@ const ShiftLists = ({data,navigation}) => {
           />
         </View>
       )
+}
+
+jewelStyle = function(status) {
+  if(status == 2){
+    return {
+      backgroundColor: 'red',
+      paddingVertical: 10,
+      marginVertical: 4,
+      borderRadius: 4,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+    }
+  }else{
+    return {
+      backgroundColor: '#f1f3f6',
+      paddingVertical: 10,
+      marginVertical: 4,
+      borderRadius: 4,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+    }
+  }
+  
 }
 
 const styles = StyleSheet.create({
