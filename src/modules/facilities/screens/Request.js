@@ -73,10 +73,7 @@ const schedulesScreen = (props) => {
     }
 
     const requestShift = async() => {
-
-        // setErrors([]);
         setisSaving(true);
-        // setIsErrors(false);
 
         const body = new FormData();
 
@@ -104,7 +101,6 @@ const schedulesScreen = (props) => {
                     },
                     ],
                 );
-                // redirection(navigation,'Profile',1000);
             }else{
                 console.log('Something Went Wrong');
                 Alert.alert(
@@ -118,7 +114,66 @@ const schedulesScreen = (props) => {
                     },
                     ],
                 );
-            // setErrors([data.msg]);
+            }
+        } else {
+            console.log('Something Went Wrong');
+            Alert.alert(
+                "Error",
+                "Something Went Wrong",
+                [
+                {
+                    text: "Ok",
+                    onPress: () => navigation.navigate('Facilities'),
+                    style: "cancel",
+                },
+                ],
+            );
+        }
+        setisSaving(false);
+    }
+
+    const swapShift = async() => {
+        setisSaving(true);
+
+        const body = new FormData();
+
+        body.append('FacilityID',facID);
+        body.append('ScheduleID',schedID);
+        body.append('ScheduleDate',date);
+        body.append('EmployeeID',employee_id);
+
+        const response = await api.post('reactapi/','swapShift',body);
+        console.log('response:',response)
+        let data = await response.data;
+        if (response.status === 200) {
+            setisSaving(false);
+            if (data.stat === "Success") {
+                console.log(data);
+                console.log('success lage');
+                Alert.alert(
+                    "Success",
+                    "Request Swap Shift Successful. Wait for the Approval",
+                    [
+                    {
+                        text: "Ok",
+                        onPress: () => navigation.navigate('Facilities'),
+                        style: "cancel",
+                    },
+                    ],
+                );
+            }else{
+                console.log('Something Went Wrong');
+                Alert.alert(
+                    "Error",
+                    data.msg,
+                    [
+                    {
+                        text: "Ok",
+                        onPress: () => navigation.navigate('Facilities'),
+                        style: "cancel",
+                    },
+                    ],
+                );
             }
         } else {
             console.log('Something Went Wrong');
@@ -212,15 +267,18 @@ const schedulesScreen = (props) => {
                                 <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
                                     <Text style={{fontSize:20}}>{start_time} - {end_time}</Text>
                                 </View>
+                                <View style={{flexDirection: 'row',alignContent: 'space-around'}}>
+                                    <Text style={{fontSize:20,color:'red'}}>This Schedule has been filled</Text>
+                                </View>
                             </View>
-                            <View style={{flex:2,alignItems: 'center'}}>
-                                <Text style={{fontSize:30}}>Request This Schedule?</Text>
+                            <View style={{flex:1,alignItems: 'center'}}>
+                                <Text style={{fontSize:25}}>Request Swap of Schedule?</Text>
                             </View>
                             <View style={{flex:2,flexDirection: 'row',justifyContent: 'center'}}>
                                 <Button style={[{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK,marginRight:30,marginLeft:30,width:100,flex:1,justifyContent: "center",alignItems: "center"}]} onPress={()=>navigation.goBack()}>
                                     <Text xb>CANCEL</Text>
                                 </Button>
-                                <Button style={[{ backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK,width:100,flex:1,marginRight:30,justifyContent: "center",alignItems: "center"}]} onPress={() => isSaving?null:requestShift()}>
+                                <Button style={[{ backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK,width:100,flex:1,marginRight:30,justifyContent: "center",alignItems: "center"}]} onPress={() => isSaving?null:swapShift()}>
                                     <Text xb style={{textAlignVertical: "center",textAlign: "center"}}>Request</Text>
                                 </Button>
                             </View>
