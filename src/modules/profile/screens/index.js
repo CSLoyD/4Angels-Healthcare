@@ -6,7 +6,6 @@ import { connect, useDispatch } from 'react-redux';
 import { BODY } from "theme";
 import ProfileDetails from '../components/ProfileDetails';
 import {getProfile} from '../slices/ProfileSlice';
-import Footers from 'containers/Footers';
 
 const Profile = (props) => {
     const dispatch = useDispatch();
@@ -32,7 +31,7 @@ const Profile = (props) => {
             <Container backgroundColor='#FFF'>
                 <Content refreshControl={
                     <RefreshControl
-                        onRefresh={()=>getProfile()}
+                        onRefresh={()=>_getProfile()}
                         refreshing={isFetching}
                         colors={[BODY.ORANGE_COLOR]} //android
                         tintColor={BODY.ORANGE_COLOR} //ios
@@ -41,8 +40,6 @@ const Profile = (props) => {
                 }>
                 <ProfileDetails details={details} navigation={navigation} />
                 </Content>
-
-                <Footers navigation={navigation} />
 
             </Container>
             

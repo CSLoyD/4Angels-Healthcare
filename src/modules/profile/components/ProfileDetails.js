@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { TouchableOpacity, ImageBackground, Image, Linking } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { View, Button } from 'native-base';
 import { Card, Icon } from 'react-native-elements';
@@ -12,7 +12,7 @@ import {reset} from 'modules/login/slices/LoginSlice';
 const ProfileDetails = (props) => {
     const dispatch = useDispatch();
     const {details, navigation} = props;
-    
+    console.log(details);
     return (
         <Card containerStyle={styles.cardContainer}>
             <View style={styles.container}>
@@ -45,7 +45,7 @@ const ProfileDetails = (props) => {
                 </ImageBackground>
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => { Linking.openURL(`tel:${details.phone}`) }}>
                 <View style={styles.SubContainers}>
                     <View style={styles.SubIconRow}>
                         <Icon
@@ -67,7 +67,7 @@ const ProfileDetails = (props) => {
                 <View style={styles.separator} />
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => { Linking.openURL(`mailto:${details.email}`) }}>
                 <View style={styles.SubContainers}>
                     <View style={styles.SubIconRow}>
                         <Icon
@@ -91,7 +91,7 @@ const ProfileDetails = (props) => {
             </View>
 
             <View flexDirection="row">
-                <Button style={[styles.Button,{ backgroundColor: BODY.ORANGE_COLOR, borderColor: BODY.ORANGE_COLOR }]} onPress={() => dispatch(reset({}))}>
+                <Button style={[styles.Button,{ backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK }]} onPress={() => dispatch(reset({}))}>
                     <Text light xb>LOGOUT</Text>
                 </Button>
             </View>

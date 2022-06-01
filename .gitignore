@@ -60,4 +60,8 @@ buck-out/
 /ios/Pods/
 
 # Source Files
+<<<<<<< HEAD
 /src/api/constants.js
+=======
+src/api/constants.js
+>>>>>>> main

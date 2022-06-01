@@ -139,19 +139,19 @@ const Profile = (props) => {
                         <Input placeholder='' name="_address" value={_address}  onChangeText={(val)=>setaddress(val)} />
                     </Item>
                     <Item>
-                        <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.RED_COLOR }]} onPress={()=>navigation.navigate("Profile")}>
+                        <Button style={[styles.Button, { backgroundColor: BODY.RED_COLOR, borderColor: BODY.BLACK }]} onPress={()=>navigation.navigate("Profile")}>
                             <Text xb>CANCEL</Text>
                         </Button>
                     </Item>
 
                     <Item>
-                        <Button style={[styles.Button, { backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.YELLOW_COLOR }]} onPress={()=>navigation.navigate("ResetPass")}>
+                        <Button style={[styles.Button, { backgroundColor: BODY.YELLOW_COLOR, borderColor: BODY.BLACK }]} onPress={()=>navigation.navigate("ResetPass")}>
                             <Text xb>RESET PASSWORD</Text>
                         </Button>
                     </Item>
 
                     <Item>
-                        <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.MAIN_COLOR }]} onPress={() => isSaving?null:saveChanges()}>
+                        <Button style={[styles.Button, { backgroundColor: BODY.MAIN_COLOR, borderColor: BODY.BLACK }]} onPress={() => isSaving?null:saveChanges()}>
                             {isSaving ? (<Bubbles size={10} color="fff" />)
                             : (<Text light xb> UPDATE PROFILE </Text>)
                             }
