@@ -33,8 +33,10 @@ const CalendarComp = ({data,stat,navigation})  => {
         markedDay[item.schedule_date] = {
           selected: true,
           marked: true,
-          selectedColor: "#56BBF1",
-          dotColor: '#FF1818'
+          selectedColor: "blue",
+          dotColor: 'blue'
+          // selectedColor: "#56BBF1",
+          // dotColor: '#FF1818'
         };
       });
     }
