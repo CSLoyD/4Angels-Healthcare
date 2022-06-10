@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     Image,
+    FlatList,
     Alert
   } from 'react-native';
 import { alignContent, paddingTop } from 'styled-system';
@@ -14,9 +15,10 @@ import { Icon } from 'react-native-elements';
 
 const HeaderSearch = ({data,navigation}) => {
     return (
-        <View style={{marginBottom: 120}}>
-           <SwipeListView
+        <View style={{marginBottom: 100,marginTop:0}}>
+           <FlatList
             data={data}
+            style={{backgroundColor:'#6cc1bd'}}
             renderItem={({item}) => (
               <TouchableWithoutFeedback
                 onPress={() => {
@@ -36,18 +38,21 @@ const HeaderSearch = ({data,navigation}) => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'center',
+                    width: '80%',
+                    marginLeft: '10%'
                   }}
                 >
                   <Text
                     style={{
                       fontWeight: '500',
-                      fontSize: 20,
+                      fontSize: 30,
                     }}
                   >
                     {item.facility_name}
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
+              
             )}
             renderHiddenItem={({item}) => (
               <View style={styles.rowBack}>
@@ -98,8 +103,6 @@ const HeaderSearch = ({data,navigation}) => {
                 </View>
               </View>
             )}
-            leftOpenValue={100}
-            rightOpenValue={-100}
           />
         </View>
       )

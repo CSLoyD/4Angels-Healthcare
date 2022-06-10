@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { RefreshControl} from 'react-native';
+import { RefreshControl, Alert} from 'react-native';
 import { Text} from 'components';
 import { Container,  Header,} from 'native-base';
 import { connect, useDispatch } from 'react-redux';
@@ -15,6 +15,8 @@ const schedulesScreen = (props) => {
     const dispatch = useDispatch()
     const {schedDetails,isFetching,schedStatus} = props;
 
+    console.log('day',date);
+    
     const SchedArr = [];
 
     schedDetails.map(function(currentValue, index){
@@ -26,9 +28,8 @@ const schedulesScreen = (props) => {
     });
     console.log(SchedArr);
 
-
     return (
-        <Container style={styles.Container} refreshControl={
+        <Container style={{backgroundColor:'#6cc1bd'}} refreshControl={
             <RefreshControl
                 onRefresh={() => console.log('nice')}
                 colors={[BODY.SECONDARY_COLOR]} //android

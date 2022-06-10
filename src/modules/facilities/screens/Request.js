@@ -197,7 +197,7 @@ const schedulesScreen = (props) => {
     
     if(schedStatus == 1){
         return (
-            <Container style={styles.Container} refreshControl={
+            <Container style={{backgroundColor:'#6cc1bd'}} refreshControl={
                 <RefreshControl
                     onRefresh={() => console.log('nice')}
                     colors={[BODY.SECONDARY_COLOR]} //android
@@ -211,7 +211,12 @@ const schedulesScreen = (props) => {
                 ) : (
                     <>
                      <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
-                        <Text style={styles.H1} >Request Schedules </Text>
+                        <Text style={{
+                            textAlign: 'left',
+                            textAlignVertical: "center",
+                            fontSize: 40,
+                            color: '#000',
+                        }} >Request Schedules </Text>
                     </Header>
                     <View style={{flex: 0.5,margin:20,shadowColor:'black',borderRadius: 10,borderWidth: 2,backgroundColor: '#abc9f5'}} >
                         <View style={{color: 'green',flex: 1}} >

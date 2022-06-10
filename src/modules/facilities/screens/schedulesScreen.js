@@ -32,7 +32,7 @@ const schedulesScreen = (props) => {
     }
 
     return (
-        <Container style={styles.Container} refreshControl={
+        <Container style={{backgroundColor:'#6cc1bd'}} refreshControl={
             <RefreshControl
                 onRefresh={() => console.log('nice')}
                 colors={[BODY.SECONDARY_COLOR]} //android

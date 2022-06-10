@@ -29,12 +29,18 @@ const CalendarComp = ({data,stat,navigation})  => {
     let markedDay = {};
 
     if(data){
+      console.log('naa');
+    }else{
+      console.log('wala');
+    }
+
+    if(data){
       data.map((item) => {
         markedDay[item.schedule_date] = {
           selected: true,
-          marked: true,
+          marked: false,
           selectedColor: "blue",
-          dotColor: 'blue'
+          // dotColor: 'white'
           // selectedColor: "#56BBF1",
           // dotColor: '#FF1818'
         };
@@ -60,6 +66,40 @@ const CalendarComp = ({data,stat,navigation})  => {
 
     return (
         <Calendar
+        style={{backgroundColor:'#6cc1bd'}}
+        theme={{
+          calendarBackground:'#6cc1bd',
+          'stylesheet.day.basic':{
+            'base':{
+              width:40,
+              height:40
+            },
+            'text':{
+              textAlign: 'center',
+              paddingTop: 6,
+              fontSize:20
+            }
+          },
+          'stylesheet.calendar.header':{
+            'monthText':{
+              fontSize:30,
+            },
+            'dayHeader':{
+              fontSize:15,
+            },
+            'arrowImage':{
+              tintColor: 'blue',
+              width:50,
+              height:50
+            },
+            
+          },
+          'stylesheet.calendar':{
+            'monthView':{
+              backgroundColor: 'red',
+            }
+          }
+      }}
         datas={today}
         markedDates={ markedDay }
         // markedDates={
@@ -82,7 +122,7 @@ const CalendarComp = ({data,stat,navigation})  => {
             })
           }}
           // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-          monthFormat={'yyyy MM'}
+          monthFormat={'MMMM yyyy'}
           // Handler which gets executed when visible month changes in calendar. Default = undefined
           onMonthChange={month => {
             console.log('month changed', month);
@@ -96,6 +136,7 @@ const CalendarComp = ({data,stat,navigation})  => {
           disableMonthChange={true}
           // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday.
           firstDay={1}
+          enableSwipeMonths={true}
         />
     );
 }

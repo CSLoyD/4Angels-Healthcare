@@ -10,9 +10,9 @@ export const styles = StyleSheet.create({
         
       },
     H1: {
-        textAlign: 'left',
+        textAlign: 'center',
         textAlignVertical: "center",
-        fontSize: 20,
+        fontSize: 45,
         color: '#000',
     },
     test2: {

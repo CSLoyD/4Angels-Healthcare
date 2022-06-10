@@ -28,7 +28,7 @@ const FacilitiesScreen = (props) => {
     }
 
     return (
-        <Container style={styles.Container} refreshControl={
+        <Container style={{backgroundColor:'#6cc1bd'}} refreshControl={
             <RefreshControl
                 onRefresh={() => console.log('nice')}
                 refreshing={isFetching}
@@ -45,7 +45,7 @@ const FacilitiesScreen = (props) => {
                 <Header style={{ backgroundColor: '#fff' , height: 75, borderBottomWidth: 2,borderBottomColor: '#000'}} androidStatusBarColor={BODY.THEME} noShadow iosBarStyle={'dark-content'}>
                     <Text style={styles.H1} >Facilities</Text>
                 </Header>
-                <Search />
+                {/* <Search /> */}
                 <HeaderSearch data={facilitiesDetails} navigation={navigation}/>
                 </>
                 

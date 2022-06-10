@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     Image,
+    FlatList,
     Alert
   } from 'react-native';
 import { alignContent, paddingTop } from 'styled-system';
@@ -15,8 +16,8 @@ import { Icon } from 'react-native-elements';
 const ShiftLists = ({data,navigation}) => {
 
     return (
-        <View style={{marginBottom: 120}}>
-           <SwipeListView
+        <View style={{marginBottom: 120,marginTop: 15}}>
+           <FlatList
             data={data}
             renderItem={({item}) => (
               <TouchableWithoutFeedback
@@ -37,7 +38,7 @@ const ShiftLists = ({data,navigation}) => {
                   <Text
                     style={{
                       fontWeight: '500',
-                      fontSize: 20,
+                      fontSize: 32,
                     }}
                   >
                     {item.time_start_standard} - {item.time_end_standard}
@@ -111,6 +112,8 @@ jewelStyle = function(status) {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
+      width: '80%',
+      marginLeft: '10%'
     }
   }else{
     return {
@@ -121,6 +124,8 @@ jewelStyle = function(status) {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
+      width: '80%',
+      marginLeft: '10%'
     }
   }
   
